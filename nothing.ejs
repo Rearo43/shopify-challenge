@@ -1,0 +1,55 @@
+'use strict';
+
+const PORT = process.env['PORT'] || 3010;
+
+const express = require('express');
+const morgan = require('morgan');
+
+const app = express();
+
+app.use(morgan('dev'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('./public'));
+
+app.set('view engine', 'ejs');
+
+const { createClient } = require('@supabase/supabase-js')
+
+const sbURL = process.env['SUPABASE_URL'];
+const sbKEY = process.env['SUPABASE_KEY'];
+const supabase = createClient(sbURL, sbKEY);
+
+const main = async () => {
+let { data: candles } = await supabase
+  .from('candles')
+  .select('name')
+    // console.log(array);
+  }
+  console.log(main());
+
+main(0);
+// const main =  () => {
+//   let { data, error } = supabase
+//     .from('candles')
+//     .select('name, inventory')
+
+//   if (error) {
+//     console.error(error)
+//     return
+//   }
+
+//   console.log(data)
+// }
+
+// main()
+
+app.get('/', home);
+
+app.use('*', routeNotFound);
+app.use(bigError);
+
+function home(req, res) {
+  // let data = main();
+  // console.log(data);
+  res.render('pages/home', {output: main()});
+}

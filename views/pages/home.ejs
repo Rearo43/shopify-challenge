@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    <form class="updateForm" action="/update" method="post">
+      <div class="updateF">
+        <div class="select">
+          <select name="name" id="name">
+            <option value="0">Choose a Candle:</option>
+            <% output.forEach(object=> { %>
+            <option value="<%=object.name %>"><%= object.name %></option>
+            <% }) %>
+          </select>
+        </div>
+        <br />
+        <label for="amount">Amount</label>
+        <input type="radio" id="amount" name="column" value="amount" />
+        <br />
+        <label for="num">In Stock</label>
+        <input type="radio" id="num" name="column" value="num" />
+        <br />
+        <label for="value">Value</label>
+        <input type="number" name="value" step="0.01" />
+        <br />
+        <button type="submit">Update</button>
+      </div>
+    </form>
+    <form class="addForm" action="/addInventory" method="post">
+      <div class="addF">
+        <label for="name">Name:</label>
+        <input type="text" name="name" />
+        <br />
+        <label for="scent">Scent:</label>
+        <input type="text" name="scent" />
+        <br />
+        <label for="amount">Amount:</label>
+        <input type="number" name="amount" step="0.01" />
+        <br />
+        <label for="num">In Stock:</label>
+        <input type="number" name="num" />
+        <br />
+        <button type="submit">Add</button>
+      </div>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Scent</th>
+          <th>Amount</th>
+          <th>In Stock</th>
+        </tr>
+      </thead>
+      <% output.forEach(object=>{ %>
+      <tr>
+        <td><%= object.name %></td>
+        <td><%= object.scent %></td>
+        <td><%= object.amount %></td>
+        <td><%= object.inventory %></td>
+      </tr>
+      <% }) %>
+    </table>
+  </body>
+</html>
